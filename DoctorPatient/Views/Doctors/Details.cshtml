@@ -32,5 +32,6 @@ else
 }
 <hr />
 
+<p>@Html.ActionLink("Edit this doctor's info", "Edit", new {id = @Model.DoctorId})</p>
 <p>@Html.ActionLink("Add a Patient", "AddPatient", new {id = @Model.DoctorId})</p>
 <p>@Html.ActionLink("Back to Doctors", "Index")</p>

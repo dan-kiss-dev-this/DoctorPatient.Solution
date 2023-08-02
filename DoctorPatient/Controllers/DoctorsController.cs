@@ -73,7 +73,21 @@ namespace DoctorPatient.Controllers
       int doctorId = joinEntry.DoctorId;
       _db.DoctorPatientJoins.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Details", new {id = doctorId});
+      return RedirectToAction("Details", new { id = doctorId });
+    }
+
+    public ActionResult Edit(int id)
+    {
+      Doctor editDoctor = _db.Doctors.FirstOrDefault(entry => entry.DoctorId == id);
+      return View(editDoctor);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Doctor doctor)
+    {
+      _db.Doctors.Update(doctor);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = doctor.DoctorId });
     }
   }
 
