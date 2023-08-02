@@ -1,0 +1,31 @@
+@{
+    Layout = "_Layout";
+}
+
+@using DoctorPatient.Models
+@model DoctorPatient.Models.Doctor
+
+<h1>Doctor Details</h1>
+<hr />
+
+<h3>Name: @Html.DisplayFor(model => model.Name)</h3>
+<h3>Specialty: @Html.DisplayFor(model => model.Specialty)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+    <p>This doctor is currently seeing no patients.</p>
+}
+else
+{
+    <h3>Patient List:</h3>
+    <ul>
+    @foreach(DoctorPatientJoin entry in Model.JoinEntities)
+    {
+        <li>@entry.Patient.Name</li>
+    }
+    </ul>
+}
+<hr />
+
+<p>@Html.ActionLink("Add a Patient", "AddPatient", new {id = @Model.DoctorId})</p>
+<p>@Html.ActionLink("Back to Doctors", "Index")</p>
