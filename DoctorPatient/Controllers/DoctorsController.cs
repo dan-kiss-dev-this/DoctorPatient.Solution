@@ -65,6 +65,16 @@ namespace DoctorPatient.Controllers
       }
       return RedirectToAction("Details", new { id = doctor.DoctorId });
     }
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      DoctorPatientJoin joinEntry = _db.DoctorPatientJoins.FirstOrDefault(entry => entry.DoctorPatientJoinId == joinId);
+      int doctorId = joinEntry.DoctorId;
+      _db.DoctorPatientJoins.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = doctorId});
+    }
   }
 
 }

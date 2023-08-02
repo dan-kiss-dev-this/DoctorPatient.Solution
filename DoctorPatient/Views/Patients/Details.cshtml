@@ -1,5 +1,5 @@
 @{
-  Layout = "_Layout";
+      Layout = "_Layout";
 }
 
 @model DoctorPatient.Models.Patient
@@ -9,20 +9,25 @@
 
 <p>Name: @Html.DisplayFor(model => model.Name)
 </p>
-    <p>Birthdate: @Html.DisplayFor(model => model.Birthdate)</p>
+<p>Birthdate: @Html.DisplayFor(model => model.Birthdate)</p>
 
-    @if (@Model.JoinEntities.Count == 0)
+@if (@Model.JoinEntities.Count == 0)
 {
       <p>There are no doctors associated with this patient</p>
 }
 else
 {
       <p>There are doctors associated with this patient:</p>
-  foreach (DoctorPatientJoin entry in @Model.JoinEntities)
-  {
-        <h3>@entry.Doctor.Name</h3>
-  }
+      foreach (DoctorPatientJoin entry in @Model.JoinEntities)
+      {
+            <h3>@entry.Doctor.Name</h3>
+            @using (Html.BeginForm("DeleteJoin", "Patients"))
+            {
+                  @Html.Hidden("doctorPatientJoinId", @entry.DoctorPatientJoinId)
+                  <input type="submit" value="Delete doctor" />
+            }
+      }
 }
 
-    <p>@Html.ActionLink("Add a doctor", "AddDoctor", new { id = @Model.PatientId })</p>
-    <p>@Html.ActionLink("Go back", "Index")</p>    
+<p>@Html.ActionLink("Add a doctor", "AddDoctor", new { id = @Model.PatientId })</p>
+<p>@Html.ActionLink("Go back", "Index")</p>
