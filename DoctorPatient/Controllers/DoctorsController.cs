@@ -89,6 +89,23 @@ namespace DoctorPatient.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = doctor.DoctorId });
     }
+
+    public ActionResult Delete(int id)
+    {
+      Doctor doctorToDelete = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+      _db.Doctors.Remove(doctorToDelete);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    // [HttpPost]
+    // public ActionResult Delete(int id)
+    // {
+    //   Doctor doctorToDelete = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+    //   _db.Doctors.Remove(doctorToDelete);
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
   }
 
 }

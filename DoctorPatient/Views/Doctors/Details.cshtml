@@ -11,7 +11,7 @@
 <h3>Name: @Html.DisplayFor(model => model.Name)</h3>
 <h3>Specialty: @Html.DisplayFor(model => model.Specialty)</h3>
 
-@if(@Model.JoinEntities.Count == 0)
+@if (@Model.JoinEntities.Count == 0)
 {
     <p>This doctor is currently seeing no patients.</p>
 }
@@ -19,19 +19,20 @@ else
 {
     <h3>Patient List:</h3>
     <ul>
-    @foreach(DoctorPatientJoin entry in Model.JoinEntities)
-    {
-        <li>@entry.Patient.Name</li>
-        @using (Html.BeginForm("DeleteJoin", "Doctors"))
+    @foreach (DoctorPatientJoin entry in Model.JoinEntities)
         {
-            @Html.Hidden("joinId", @entry.DoctorPatientJoinId)
-            <input type="submit" value="Remove"/>
+            <li>@entry.Patient.Name</li>
+            @using (Html.BeginForm("DeleteJoin", "Doctors"))
+            {
+                @Html.Hidden("joinId", @entry.DoctorPatientJoinId)
+                <input type="submit" value="Remove" />
+            }
         }
-    }
     </ul>
 }
 <hr />
 
 <p>@Html.ActionLink("Edit this doctor's info", "Edit", new {id = @Model.DoctorId})</p>
 <p>@Html.ActionLink("Add a Patient", "AddPatient", new {id = @Model.DoctorId})</p>
+<p>@Html.ActionLink("Delete this doctor", "Delete", new { id = @Model.DoctorId})</p>
 <p>@Html.ActionLink("Back to Doctors", "Index")</p>
