@@ -93,10 +93,28 @@ namespace DoctorPatient.Controllers
     public ActionResult Delete(int id)
     {
       Doctor doctorToDelete = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+      // _db.Doctors.Remove(doctorToDelete);
+      // _db.SaveChanges();
+      return View(doctorToDelete);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeletePost(int id)
+    {
+      //note int id is coming from the url aka does not have to be passed
+      Doctor doctorToDelete = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
       _db.Doctors.Remove(doctorToDelete);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    // public ActionResult Delete(int id)
+    // {
+    //   Doctor doctorToDelete = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+    //   _db.Doctors.Remove(doctorToDelete);
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
 
     // [HttpPost]
     // public ActionResult Delete(int id)

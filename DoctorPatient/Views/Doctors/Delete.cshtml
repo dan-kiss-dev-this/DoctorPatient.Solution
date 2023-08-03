@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorPatient.Models.Doctor;
+
+<h2>Delete the doctor @Model.Name</h2>
+
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete">
+}
